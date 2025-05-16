@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Eco-Learn",
+    "slug": "eco-learn",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo.svg",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/logo.svg",
+      "resizeMode": "contain",
+      "backgroundColor": "#4CAF50"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo.svg",
+        "backgroundColor": "#4CAF50"
+      }
+    },
+    "web": {
+      "favicon": "./assets/logo.svg",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "tsconfigPaths": true
+    }
+  }
+}

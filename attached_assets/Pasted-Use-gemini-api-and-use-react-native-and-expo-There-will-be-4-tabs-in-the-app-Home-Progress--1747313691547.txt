@@ -1,0 +1,69 @@
+Use gemini api, and use react native and expo.
+There will be 4 tabs in the app.
+
+Home
+Progress
+Chatbot
+Contact US page
+Home page should contain 10 Chapters Related to " Green Methodologies, Clean Development Mechanisms (CDM), and Environmental Impact Assessment (EIA)"
+Each chapter should contain 3 pages of content including pictures for user to study. And based on the chapter there will be a mcq based test of 5 question and the end of the chapter. The user must score atleast 4 out of 5 question correct in order to next chapter.
+(Download content for chapters on your own)
+
+For example:
+UNIT 1 : Green methologies,
+------Chapter 1
+----------Test
+------Chapter 2
+----------Test
+------Chapter 3
+----------Test
+
+UNIT 2 : Clean Development Mechanisms
+------Chapter 1
+----------Test
+------Chapter 2
+----------Test
+------Chapter 3
+----------Test
+
+UNIT 3 : Environmental Impact Assessment
+------Chapter 1
+----------Test
+------Chapter 2
+----------Test
+------Chapter 3
+----------Test
+
+In "Progress" tab build a Dashboard which will tell the user how much he/she have completed and what are the scores of the test they have given.
+give this dashboard a professional look
+
+In "Chatbot" tab build a Chatbot inbox similar to a Whatsapp or any chatting box. Here we will use gemini api key to power the chatbot.
+Api key = AIzaSyBHSM6qJ0kjIaGPtFK0PSb952elByKkdJg
+
+In "contact us" tab show a dispute box where user can contact me.
+provide blank boxes for user to fill his/her details such as
+Name
+Email(with constrant to check if its an email)
+
+then a drop down which will 3 option
+
+Dispute
+Feedback
+Other
+Then an big empty box for user to type his problem or anything he wants
+then a submit button.
+
+Now there will be a floating leaf icon bubble which will drop random suggestions to save envirnoment. and this floating bubble will only be available on home tab, at the bottom right corner.
+
+All test scores and contact us quries should be stored in firebase.
+Here is my firebase config:
+const firebaseConfig = {
+apiKey: "AIzaSyCMDykPHXB6tvW7kRLBCkgsLgXJ9ZiRnzw",
+authDomain: "eco-learn-v1.firebaseapp.com",
+databaseURL: "https://eco-learn-v1-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId: "eco-learn-v1",
+storageBucket: "eco-learn-v1.firebasestorage.app",
+messagingSenderId: "736759515594",
+appId: "1:736759515594:web:100459974e5e7ea76d2733",
+measurementId: "G-1C5C8MNF9E"
+};

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLearn - Environmental Education</title>
+    <link rel="stylesheet" href="/css/eco-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Auth Container -->
+    <div id="auth-container" class="auth-container">
+        <div class="header">
+            <h1>EcoLearn</h1>
+        </div>
+        
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-auth-tab="login">Login</div>
+                <div class="auth-tab" data-auth-tab="register">Register</div>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="login-tab" class="auth-form">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email" class="form-label">Email</label>
+                        <input type="email" id="login-email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password" class="form-label">Password</label>
+                        <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+            
+            <!-- Register Form -->
+            <div id="register-tab" class="auth-form hidden">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-name" class="form-label">Name</label>
+                        <input type="text" id="register-name" class="form-input" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email" class="form-label">Email</label>
+                        <input type="email" id="register-email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password" class="form-label">Password</label>
+                        <input type="password" id="register-password" class="form-input" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password" class="form-label">Confirm Password</label>
+                        <input type="password" id="register-confirm-password" class="form-input" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- App Container -->
+    <div id="app-container" class="hidden">
+        <!-- Home Tab -->
+        <div id="home-tab" class="tab-content">
+            <div class="header">
+                <h1>EcoLearn</h1>
+                <button id="logout-button" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+            
+            <div class="container">
+                <div class="course-intro">
+                    <img src="/images/banner.jpeg" alt="Environmental Education" class="banner-image">
+                    <h2>Environmental Education</h2>
+                    <p>Learn about sustainability and environmental protection</p>
+                </div>
+                
+                <div id="units-container" class="units-list">
+                    <!-- Units will be loaded dynamically -->
+                    <div class="loader"></div>
+                    <p class="text-center">Loading course content...</p>
+                </div>
+            </div>
+            
+            <!-- Floating Tip (only visible on home tab) -->
+            <div class="floating-tip">
+                <div class="tip-button">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="tip-popup" id="tip-popup">
+                    <div class="tip-close">×</div>
+                    <p id="tip-text">Take shorter showers to conserve water.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Tab -->
+        <div id="progress-tab" class="tab-content hidden">
+            <div class="header">
+                <h1>My Progress</h1>
+            </div>
+            
+            <div class="container">
+                <div class="progress-header">
+                    <h2>Learning Progress</h2>
+                    <p>Track your learning journey and achievements</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="completed-chapters">0/9</div>
+                        <div class="stat-label">Completed</div>
+                        <div id="completion-percentage">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="average-score">-/5</div>
+                        <div class="stat-label">Avg. Score</div>
+                        <div id="avg-percentage">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="tests-passed">0</div>
+                        <div class="stat-label">Tests Passed</div>
+                        <div id="tests-percentage">0%</div>
+                    </div>
+                </div>
+                
+                <div class="progress-chart">
+                    <h3>Overall Progress</h3>
+                    <div class="chart-container">
+                        <svg class="circle-chart" viewBox="0 0 36 36">
+                            <path class="chart-circle bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path id="completion-path" class="chart-circle progress" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path id="score-path" class="chart-circle progress-secondary" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: var(--primary-color);"></span>
+                            <span>Completion</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: var(--secondary-color);"></span>
+                            <span>Avg. Score</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="test-results" class="test-results">
+                    <h3>Your Results</h3>
+                    <!-- Results will be loaded dynamically -->
+                    <p class="text-center">Loading test results...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chatbot Tab -->
+        <div id="chatbot-tab" class="tab-content hidden">
+            <div class="header">
+                <div class="back-button" id="back-to-home">
+                    <i class="fas fa-arrow-left"></i> Back
+                </div>
+                <h1>EcoBot</h1>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="chat-info">
+                        <h3>EcoBot Assistant</h3>
+                        <p>Ask me anything about environmental topics</p>
+                    </div>
+                    <div class="chat-actions">
+                        <i class="fas fa-trash" id="clear-chat" style="margin-left: 10px; cursor: pointer;"></i>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chat-messages">
+                    <!-- First message -->
+                    <div class="message bot">
+                        <div class="bot-avatar">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="message-bubble">
+                            Hello! I'm your EcoLearn assistant. Feel free to ask me anything about environmental topics, sustainability, or get help with your studies.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
+                    <div class="send-button" id="send-message">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Tab -->
+        <div id="contact-tab" class="tab-content hidden">
+            <div class="header">
+                <h1>Contact Us</h1>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-intro">
+                    <h2>Contact Us</h2>
+                    <p>Have questions or feedback? We'd love to hear from you.</p>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name" class="form-label">Name</label>
+                            <input type="text" id="contact-name" class="form-input" placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">Email</label>
+                            <input type="email" id="contact-email" class="form-input" placeholder="Enter your email address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Reason for Contact</label>
+                            <div class="contact-options">
+                                <div class="contact-option" data-value="dispute">
+                                    <div class="option-icon">
+                                        <i class="fas fa-question-circle"></i>
+                                    </div>
+                                    <div>Dispute</div>
+                                </div>
+                                <div class="contact-option" data-value="feedback">
+                                    <div class="option-icon">
+                                        <i class="fas fa-comment"></i>
+                                    </div>
+                                    <div>Feedback</div>
+                                </div>
+                                <div class="contact-option" data-value="other">
+                                    <div class="option-icon">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </div>
+                                    <div>Other</div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="contact-category" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-message" class="form-label">Message</label>
+                            <textarea id="contact-message" class="form-textarea" placeholder="Type your message here..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chapter View (dynamically shown) -->
+        <div id="chapter-view" class="hidden">
+            <div class="header">
+                <div class="back-button" id="back-to-unit">
+                    <i class="fas fa-arrow-left"></i> Back
+                </div>
+                <h1 id="chapter-title">Chapter Title</h1>
+            </div>
+            
+            <div class="container">
+                <div id="chapter-content" class="chapter-content">
+                    <!-- Chapter content will be loaded here -->
+                </div>
+                
+                <div class="take-quiz-container">
+                    <button id="take-quiz-btn" class="btn btn-primary">
+                        <i class="fas fa-clipboard-check"></i> Take Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quiz View (dynamically shown) -->
+        <div id="quiz-view" class="hidden">
+            <div class="header">
+                <div class="back-button" id="back-to-chapter">
+                    <i class="fas fa-arrow-left"></i> Back
+                </div>
+                <h1>Chapter Test</h1>
+            </div>
+            
+            <div class="container">
+                <div id="quiz-container" class="quiz-container">
+                    <!-- Quiz content will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Test Results View (dynamically shown) -->
+        <div id="test-result-view" class="hidden">
+            <div class="header">
+                <div class="back-button" id="back-from-results">
+                    <i class="fas fa-arrow-left"></i> Back
+                </div>
+                <h1>Test Results</h1>
+            </div>
+            
+            <div class="container">
+                <div id="test-result-container" class="test-result-container">
+                    <!-- Test results will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item active" data-tab="home">
+                <div class="nav-icon"><i class="fas fa-home"></i></div>
+                <div class="nav-label">Learn</div>
+            </div>
+            <div class="nav-item" data-tab="progress">
+                <div class="nav-icon"><i class="fas fa-chart-bar"></i></div>
+                <div class="nav-label">Progress</div>
+            </div>
+            <div class="nav-item" data-tab="chatbot">
+                <div class="nav-icon"><i class="fas fa-robot"></i></div>
+                <div class="nav-label">EcoBot</div>
+            </div>
+            <div class="nav-item" data-tab="contact">
+                <div class="nav-icon"><i class="fas fa-question-circle"></i></div>
+                <div class="nav-label">Contact</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Message display -->
+    <div id="message-container" class="hidden"></div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <!-- Initialize Firebase -->
+    <script>
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCMDykPHXB6tvW7kRLBCkgsLgXJ9ZiRnzw",
+        authDomain: "eco-learn-v1.firebaseapp.com",
+        databaseURL: "https://eco-learn-v1-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "eco-learn-v1",
+        storageBucket: "eco-learn-v1.firebasestorage.app",
+        messagingSenderId: "736759515594",
+        appId: "1:736759515594:web:100459974e5e7ea76d2733",
+        measurementId: "G-1C5C8MNF9E"
+      };
+    
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    
+    <!-- Import main app functionality -->
+    <script type="module" src="/js/main-app.js"></script>
+</body>
+</html>
