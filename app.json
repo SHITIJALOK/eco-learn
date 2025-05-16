@@ -4,10 +4,10 @@
     "slug": "eco-learn",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.svg",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logo.svg",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#4CAF50"
     },
@@ -19,19 +19,17 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo.svg",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#4CAF50"
       }
     },
     "web": {
-      "favicon": "./assets/logo.svg",
+      "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
     "plugins": [
       "expo-router"
     ],
-    "experiments": {
-      "tsconfigPaths": true
-    }
+    "scheme": "eco-learn"
   }
 }

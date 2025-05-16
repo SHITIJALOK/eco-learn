@@ -1,44 +1,52 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import 'react-native-gesture-handler';
+import { useCallback } from 'react';
+import { View } from 'react-native';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import {
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_700Bold
+} from '@expo-google-fonts/poppins';
+import {
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold
+} from '@expo-google-fonts/roboto';
+import TabNavigation from './components/TabNavigation';
+import AuthScreen from './components/AuthScreen';
+import LoadingScreen from './components/LoadingScreen';
+import { initializeFirebase } from './lib/firebase';
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_700Bold,
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return <LoadingScreen />;
+  }
+
+  // Initialize Firebase
+  initializeFirebase();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Eco-Learn</Text>
-      <Text style={styles.subtitle}>Environmental Education App</Text>
-      <ActivityIndicator size="large" color="#4CAF50" style={styles.loader} />
-      <Text style={styles.loadingText}>Initializing application...</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      <TabNavigation />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F7FA',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    color: '#4CAF50',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 18,
-    color: '#424242',
-    marginBottom: 40,
-    textAlign: 'center',
-  },
-  loader: {
-    marginBottom: 20,
-  },
-  loadingText: {
-    fontSize: 16,
-    color: '#616161',
-  },
-});
